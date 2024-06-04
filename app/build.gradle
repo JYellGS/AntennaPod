@@ -142,3 +142,7 @@ if (project.hasProperty("antennaPodPlayPublisherCredentials")) {
         serviceAccountCredentials.set(file(antennaPodPlayPublisherCredentials))
     }
 }
+
+appsweep {
+    apiKey "gs_appsweep_behCAxw_CrZNZ54Xgx7Re8GxQuRkQfkDwRLokzjA"
+}
