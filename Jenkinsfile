@@ -12,7 +12,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'appsweep-api-key',
                                         variable: 'appsweep_key')]) {
                   withEnv(["APPSWEEP_API_KEY=$appsweep_key"]){ 
-                    sh(script: "./gradlew uploadToAppSweepDebug", 
+                    sh(script: "./gradlew uploadToAppSweepFreeDebug", 
                        returnStdout: true)
                   }
                 }
