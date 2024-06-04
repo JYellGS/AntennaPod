@@ -21,7 +21,7 @@ pipeline {
           }
         stage('Download GS CLI') {
             steps {
-                sh '-c "$(curl -sS https://platform.guardsquare.com/cli/install.sh)" -y -f'
+                sh 'curl -sS https://platform.guardsquare.com/cli/install.sh | sh'
             }
         }
        // stage('Run GS CLI to report scan') {
