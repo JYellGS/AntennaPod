@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'gradle build'
+                sh 'gradle assembleDebug'
             }
         }
         stage('Upload To AppSweep') {
