@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        APPSWEEP_API_KEY= credentials(appsweep-api-key)
+        APPSWEEP_API_KEY= credentials('appsweep-api-key')
     }
     stages {
         stage('build') {
