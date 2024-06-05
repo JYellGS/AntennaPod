@@ -35,9 +35,9 @@ pipeline {
         //}
         stage('Run GS CLI to report scan') {
             steps {
-                sh 'echo $env.high_issues'
-                sh 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\" | $env.high_issues = $1'
-                sh 'echo $env.high_issues'
+                sh 'echo $high_issues'
+                sh 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\" | $high_issues = $1'
+                sh 'echo $high_issues'
                 //sh 'echo $high_issue_count'
                 //sh 'echo test'
             }
