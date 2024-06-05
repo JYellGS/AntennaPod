@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        APPSWEEP_API_KEY= credentials(appsweep-api-key)
+    }
     stages {
         stage('build') {
             steps {
@@ -8,14 +11,7 @@ pipeline {
         }
         stage('Upload To AppSweep') {
             steps { 
-          
-                withCredentials([string(credentialsId: 'appsweep-api-key',
-                                        variable: 'appsweep_key')]) {
-                  withEnv(['APPSWEEP_API_KEY=$appsweep_key']){ 
                     sh './gradlew uploadToAppSweepFreeDebug'
-                
-                }
-              }
             }
           }
         stage('Download GS CLI') {
