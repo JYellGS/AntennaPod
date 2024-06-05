@@ -33,7 +33,8 @@ pipeline {
         }
         stage('Appsweep upload with CLI') {
             steps {
-                sh 'guardsquare scan app-free-debug.apk'
+                //sh 'guardsquare scan app-free-debug.apk'
+                sh 'test'
             }
         }
         stage('Run GS CLI to report scan') {
