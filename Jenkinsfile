@@ -31,12 +31,6 @@ pipeline {
                 sh 'echo $high_issue_count'
             }
         }
-        stage('Appsweep upload with CLI') {
-            steps {
-                //sh 'guardsquare scan app-free-debug.apk'
-                sh 'test'
-            }
-        }
         stage('Run GS CLI to report scan') {
             steps {
                 //sh 'guardsquare scan results --wait-for static `cat ${{ github.workspace }}/app/build/guardsquare/appsweep/lastBuildID.txt` --format \'{.High}\' | export high_issue_count=$1
