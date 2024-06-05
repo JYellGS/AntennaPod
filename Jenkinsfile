@@ -13,7 +13,9 @@ pipeline {
         stage('Upload To AppSweep') {
             steps { 
                     sh './gradlew uploadToAppSweepFreeDebug'
+                script {    
                     build_id = sh 'cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
+                }    
             }
           }
         stage('Download GS CLI') {
