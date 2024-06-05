@@ -25,12 +25,12 @@ pipeline {
                 sh 'guardsquare --version'
             }
         }
-       // stage('Run GS CLI to report scan') {
-           // steps {
-         //  //     sh 'guardsquare scan summary --wait-for static `cat ${{ github.workspace }}/app/build/guardsquare/appsweep/lastBuildID.txt` --format '{{.High}}' | export high_issue_count=$1
-         //    echo $high_issue_count'
-           // }
-        //}
+        stage('Run GS CLI to report scan') {
+            steps {
+                sh 'guardsquare scan summary --wait-for static `cat ${{ github.workspace }}/app/build/guardsquare/appsweep/lastBuildID.txt` --format '{{.High}}' | export high_issue_count=$1
+             echo $high_issue_count'
+            }
+        }
     }
 }
 //
