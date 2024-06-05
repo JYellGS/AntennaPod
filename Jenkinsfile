@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-         stage('Run GS CLI to report scan') {
+         stage('Run GS CLI to report scan First') {
             steps {
                 sh 'guardsquare scan summary --wait-for static build_id --format \"{.High}\" | export high_issue_count=$1'
                 sh 'echo $high_issue_count'
