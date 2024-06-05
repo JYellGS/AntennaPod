@@ -15,8 +15,8 @@ pipeline {
                     sh './gradlew uploadToAppSweepFreeDebug'
                 script {    
                     build_id = Files.readString(Path.of("/Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt"))
-                    println(build_id)
                 }    
+                sh 'echo $build_id'
             }
           }
         stage('Download GS CLI') {
