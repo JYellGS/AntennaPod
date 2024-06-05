@@ -12,6 +12,7 @@ pipeline {
         stage('Upload To AppSweep') {
             steps { 
                     sh './gradlew uploadToAppSweepFreeDebug'
+                    sh 'build_id = /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
             }
           }
         stage('Download GS CLI') {
@@ -19,16 +20,16 @@ pipeline {
                 sh 'echo y | curl -sS https://platform.guardsquare.com/cli/install.sh'
             }
         }
+
+         stage('Run GS CLI to report scan') {
+            steps {
+                sh 'guardsquare scan summary --wait-for static build_id --format \'{.High}\' | export high_issue_count=$1
+                sh 'echo $high_issue_count'
+            }
+        }
         stage('Appsweep upload with CLI') {
             steps {
-                  withCredentials([string(credentialsId: 'appsweep-api-key',
-                                          variable: 'appsweep_key')]) {
-                  withEnv(['APPSWEEP_API_KEY=$appsweep_key']){ 
-                    sh(script: "build_id=${guardsquare scan app-free-debug.apk --format '{{.ID}}'}", 
-                       returnStdout: true)
-                
-                }
-                                }
+                sh 'guardsquare scan app-free-debug.apk'
             }
         }
         stage('Run GS CLI to report scan') {
