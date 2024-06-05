@@ -1,3 +1,4 @@
+def build_id
 pipeline {
     agent any
     environment {
@@ -12,7 +13,7 @@ pipeline {
         stage('Upload To AppSweep') {
             steps { 
                     sh './gradlew uploadToAppSweepFreeDebug'
-                    sh 'export build_id = `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt`'
+                    build_id = sh 'cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
             }
           }
         stage('Download GS CLI') {
