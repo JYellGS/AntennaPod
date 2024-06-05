@@ -1,8 +1,9 @@
-def build_id
+
 pipeline {
     agent any
     environment {
         APPSWEEP_API_KEY= credentials('appsweep-api-key')
+        build_id = ""
     }
     stages {
         stage('build') {
@@ -14,9 +15,9 @@ pipeline {
             steps { 
                     sh './gradlew uploadToAppSweepFreeDebug'
                 script {    
-                    build_id = readFile '/Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
+                    env.build_id = readFile '/Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
                 }    
-                sh 'echo $(build_id)'
+                sh 'echo $(env.build_id)'
             }
           }
         stage('Download GS CLI') {
