@@ -28,7 +28,7 @@ pipeline {
                   withCredentials([string(credentialsId: 'appsweep-api-key',
                                           variable: 'appsweep_key')]) {
                   withEnv(['APPSWEEP_API_KEY=$appsweep_key']){ 
-                    sh(script: "build_id=$(guardsquare scan app-free-debug.apk --format '{{.ID}}')", 
+                    sh(script: "build_id=${guardsquare scan app-free-debug.apk --format '{{.ID}}'}", 
                        returnStdout: true)
                 
                 }
