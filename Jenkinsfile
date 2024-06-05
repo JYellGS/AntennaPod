@@ -4,6 +4,7 @@ pipeline {
     environment {
         APPSWEEP_API_KEY= credentials('appsweep-api-key')
         build_id = ""
+        high_issues = 0
     }
     stages {
         stage('build') {
@@ -34,7 +35,9 @@ pipeline {
         //}
         stage('Run GS CLI to report scan') {
             steps {
-                sh 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\" | echo $1'
+                sh 'echo $env.high_issues'
+                sh 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\" | $env.high_issues = $1'
+                sh 'echo $env.high_issues'
                 //sh 'echo $high_issue_count'
                 //sh 'echo test'
             }
