@@ -39,7 +39,7 @@ pipeline {
                 sh "echo ${high_issues}"
                 script {
                     if (high_issues > 7) {
-                        throw
+                        sh 'false' 
                     }
                 }
             }
