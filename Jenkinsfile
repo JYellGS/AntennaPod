@@ -1,4 +1,5 @@
 high_issues = 0
+build_id_g = ""
 
 pipeline {
     agent any
@@ -14,10 +15,10 @@ pipeline {
         stage('Upload To AppSweep') {
             steps { 
                     sh './gradlew uploadToAppSweepFreeDebug'
-                //script {    
-                //    env.build_id = readFile '/Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
-               // }    
-               // sh 'echo $(env.build_id)'
+                script {    
+                    build_id_g = readFile '/Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt'
+                }    
+                sh "echo ${build_id_g}"
             }
           }
         stage('Download GS CLI') {
