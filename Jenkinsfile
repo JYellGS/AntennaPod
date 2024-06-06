@@ -3,7 +3,6 @@ pipeline {
     agent any
     environment {
         APPSWEEP_API_KEY= credentials('appsweep-api-key')
-        high_issues = 0
     }
     stages {
         stage('build') {
