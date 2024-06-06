@@ -37,6 +37,7 @@ pipeline {
                 script {
                     high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', returnStdout: true).trim() 
                     sh "echo ${high_issues}"
+                    high_issues += 1
                 }
                // sh "echo $high_issues"
             }    
