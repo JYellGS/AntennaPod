@@ -44,7 +44,7 @@ pipeline {
                 script {
                     high_issues = sh(script: "guardsquare scan summary --wait-for static --format \"{{.High}}\" ${build_id_g}", returnStdout: true).trim().toInteger() 
                     sh "echo ${high_issues}"
-                    high_issues +=1
+                   // high_issues +=1
                 }
             }    
         }
