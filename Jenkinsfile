@@ -31,8 +31,8 @@ pipeline {
         stage('Run GS CLI to report scan results') {
             steps {
                 script {
-                    sh(script: "guardsquare scan results --wait-for static --format json ${build_id_g}", returnStdout: true) 
-                    
+                    //sh(script: "guardsquare scan results --wait-for static --format json ${build_id_g}", returnStdout: true) 
+                    sh "guardsquare scan results --wait-for static --format json ${build_id_g}"
                     //sh "echo ${high_issues}"
                 }
             }    
