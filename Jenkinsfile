@@ -1,3 +1,4 @@
+high_issues = 0
 
 pipeline {
     agent any
@@ -34,7 +35,6 @@ pipeline {
         stage('Run GS CLI to report scan') {
             steps {
                 script {
-                    def high_issues = 0
                     high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', returnStdout: true) 
                     sh "echo $high_issues"
                 }
