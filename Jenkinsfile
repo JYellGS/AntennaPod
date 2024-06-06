@@ -3,7 +3,6 @@ pipeline {
     agent any
     environment {
         APPSWEEP_API_KEY= credentials('appsweep-api-key')
-        build_id = ""
         high_issues = 0
     }
     stages {
@@ -35,11 +34,14 @@ pipeline {
         //}
         stage('Run GS CLI to report scan') {
             steps {
-                sh 'echo $high_issues'
-                sh 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"'
-                //sh 'echo $high_issue_count'
+                script {
+                    def high_issues = 0
+                    high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', return Stdout:true) 
+                    //sh 'echo $high_issue_count'
                 //sh 'echo test'
-            }
+                }
+                sh 'echo $high_issue_count'
+            }    
         }
         stage('running high issues test') {
             steps {
