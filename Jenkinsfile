@@ -36,14 +36,14 @@ pipeline {
             steps {
                 script {
                     high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', returnStdout: true) 
-                    sh "echo $high_issues"
+                    sh "echo ${high_issues}"
                 }
                // sh "echo $high_issues"
             }    
         }
         stage('running high issues test') {
             steps {
-                sh "echo $high_issues"
+                sh "echo ${high_issues}"
             }
         }
     }
