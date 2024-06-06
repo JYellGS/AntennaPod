@@ -26,26 +26,22 @@ pipeline {
                 sh 'echo y | curl -sS https://platform.guardsquare.com/cli/install.sh'
             }
         }
-
-         //stage('Run GS CLI to report scan First') {
-         //   steps {
-         //       sh 'guardsquare scan summary --wait-for static build_id --format \"{.High}\" | export high_issue_count=$1'
-         //       sh 'echo $high_issue_count'
-          //  }
-        //}
         stage('Run GS CLI to report scan') {
             steps {
                 script {
                     high_issues = sh(script: "guardsquare scan summary --wait-for static ${build_id_g} --format \"{{.High}}\"", returnStdout: true).trim().toInteger() 
                     sh "echo ${high_issues}"
-                    high_issues += 1
                 }
-               // sh "echo $high_issues"
             }    
         }
         stage('running high issues test') {
             steps {
                 sh "echo ${high_issues}"
+                script {
+                    if (high_issues > 7) {
+                        throw
+                    }
+                }
             }
         }
     }
