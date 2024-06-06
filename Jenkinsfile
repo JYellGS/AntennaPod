@@ -35,7 +35,7 @@ pipeline {
         stage('Run GS CLI to report scan') {
             steps {
                 script {
-                    high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', returnStdout: true) 
+                    high_issues = sh(script: 'guardsquare scan summary --wait-for static `cat /Users/jared.yellen/.jenkins/workspace/Testing_develop/app/build/guardsquare/appsweep/lastBuildID.txt` --format \"{{.High}}\"', returnStdout: true).trim() 
                     sh "echo ${high_issues}"
                 }
                // sh "echo $high_issues"
