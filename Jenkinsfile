@@ -33,7 +33,7 @@ pipeline {
                 script {
                     //sh(script: "guardsquare scan results --wait-for static --format json ${build_id_g}", returnStdout: true) 
                     sh "guardsquare scan results --wait-for static --format json ${build_id_g} > appScan.json"
-                    //sh "echo ${high_issues}"
+                    sh "ls"
                 }
             }    
         }
