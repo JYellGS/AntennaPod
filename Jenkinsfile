@@ -35,6 +35,7 @@ pipeline {
                     sh "guardsquare scan results --wait-for static --format json ${build_id_g} > appScan.json"
                     sh "ls"
                     sh "guardsquare scan summary --wait-for static --format json ${build_id_g} > appScanFree.json"
+                    sh "ls"
                 }
             }    
         }
